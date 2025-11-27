@@ -1,0 +1,77 @@
+public class YahtzeeDice {
+
+	// member variable: static
+	public static final int NUM_OF_DICE = 5; 
+
+	// member variable: non-static (instance variable, each BuggyYahtzeeDice object has own copy)
+	// Declare instance variable 'dice', which will point to an
+	// array of Die objects.  
+	private Die[] dice; 
+
+
+	// Constructors: 2 different overloaded ones.
+	// Each forgot to do something.
+	// ***(1) What did I forget here?  What is the consequence?
+	public YahtzeeDice() {  
+		dice = new Die[NUM_OF_DICE];
+		for (int i = 0; i < NUM_OF_DICE; i++) {
+			dice[i] = new Die();
+		}
+	}
+	
+
+	// ***(2) What did I forget here?  What is the consequence?
+	public YahtzeeDice(int numSides) {
+		dice = new Die[NUM_OF_DICE];
+		for(int i = 0; i < NUM_OF_DICE; i++) {
+			dice[i] = new Die(numSides); 
+		}
+	}
+
+	//rolls all 5 dice and returns the total of the dice
+	public int rollAll() { 
+		int sum = 0;
+		for (int i = 0; i < dice.length; i++) {
+			dice[i].roll();
+			sum += dice[i].getDieValue();
+		}
+		return sum; // ***(4) Design-wise, what would be wrong if we did it like this?
+	}
+	
+	public void roll(boolean[] picks) {
+		for (int i = 0; i < dice.length; i++) {
+			if (picks[i]) {
+				dice[i].roll();
+			}
+		}
+	}
+
+	
+	//returns the dice array
+	public Die[] getDice() {  
+		return dice;
+	}
+
+	//returns an int[] containing the values of the 5 dice
+	public int[] getDiceValues() {  
+		int[] diceValues = new int[NUM_OF_DICE];
+		for(int i = 0; i < dice.length; i++) {
+			diceValues[i] = dice[i].getDieValue();  	// ***(5) What's wrong here?
+		}
+		return diceValues;
+	}
+
+	//returns a String representation of the object
+	public String toString() {
+		String yahtzee = "The " + NUM_OF_DICE + " dice read: ";
+
+		for(int i = 0; i < dice.length; i++) {
+			if(i < dice.length - 1)	
+				yahtzee += dice[i].getDieValue() + ", ";
+			else
+				yahtzee += dice[i].getDieValue() + ".";
+		}
+		return yahtzee;
+	}
+
+}
