@@ -1,0 +1,23 @@
+public class FoursScore {
+	private int score;
+	
+	public FoursScore(int[] values) {
+		score = calculateScore(values);
+	}
+	
+	public int calculateScore(int[] values) {	
+		int sum = 0;
+        for (int i = 0; i < values.length; i++) {
+            if (values[i] == 4) {
+                sum = sum + values[i];
+            }
+        }
+        return sum;
+	}  
+	/**
+	 * @return the score
+	 */
+	public int getScore() {
+		return score;
+	} 
+}
